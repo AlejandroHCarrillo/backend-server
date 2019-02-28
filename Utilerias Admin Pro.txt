@@ -1,6 +1,9 @@
 Instalacion de complementos para el Backend
 
 ¿Express?
+Express nos sirve para habilitar el ruteo REST de los repositorios 
+https://expressjs.com/es/starter/installing.html
+
 
 Base de datos MONGODB
 https://docs.mongodb.com/manual/tutorial/install-mongodb-on-windows/
@@ -9,7 +12,7 @@ Studio 3T
 https://robomongo.org/download
 
 
-Body Parser para pasar paramertros from body
+Body Parser: para pasar paramertros from body
 https://github.com/expressjs/body-parser
 npm install body-parser --save
 
