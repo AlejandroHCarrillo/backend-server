@@ -1,0 +1,28 @@
+Instalacion de complementos para el Backend
+
+¿Express?
+
+Base de datos MONGODB
+https://docs.mongodb.com/manual/tutorial/install-mongodb-on-windows/
+
+Studio 3T
+https://robomongo.org/download
+
+
+Body Parser para pasar paramertros from body
+https://github.com/expressjs/body-parser
+npm install body-parser --save
+
+
+
+Mongoose provides a straight-forward, schema-based solution to model your application data. It includes built-in type casting, validation, query building, business logic hooks and more, out of the box.
+
+https://mongoosejs.com/docs/index.html
+
+Validador registro unico
+npm install mongoose-unique-validator --save
+
+
+Encriptar password
+https://github.com/dcodeIO/bcrypt.js
+npm install bcryptjs --save

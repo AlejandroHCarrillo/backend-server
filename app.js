@@ -2,11 +2,22 @@ var portNumber = 3000;
 var mongoDBPort = 27017;
 
 // Requires
-var express = require('express');
-var mongoose = require('mongoose');
+var express = require('express')
+var mongoose = require('mongoose')
+var bodyParser = require('body-parser')
 
 // Inicializar variables
-var app = express();
+var app = express()
+
+// Body Parser
+// parse application/x-www-form-urlencoded
+// parse application/json
+app.use(bodyParser.urlencoded({ extended: false }))
+app.use(bodyParser.json())
+
+// Importar Rutas 
+var appRoutes = require('./routes/app')
+var usuarioRoutes = require('./routes/usuario')
 
 // Conexion a la base de datos
 mongoose.connection.openUri('mongodb://localhost:' + mongoDBPort + '/hospitalDB', (err, res )=>{
@@ -16,14 +27,10 @@ mongoose.connection.openUri('mongodb://localhost:' + mongoDBPort + '/hospitalDB'
 
 } );
 
-// Rutas 
-// app.get('/', (request, response, next));
-app.get('/', (req, res, next) => {
-    res.status(200).json({
-        ok: true,
-        mensaje: 'Peticion realizada con exito'
-    });
-} );
+// Rutas
+app.use('/usuario', usuarioRoutes)
+app.use('/', appRoutes)
+
 
 // Escuchar peticiones
 app.listen(portNumber, () => { 
