@@ -1,3 +1,5 @@
+
+
 Instalacion de complementos para el Backend
 
 ¿Express?
@@ -27,10 +29,15 @@ https://mongoosejs.com/docs/index.html
 Validador registro unico
 npm install mongoose-unique-validator --save
 
-
 Encriptar password
 https://github.com/dcodeIO/bcrypt.js
 npm install bcryptjs --save
+
+JWT: Json web Token
+
+npm install jsonwebtoken --save
+
+
 
 
 Levantar mongodb
