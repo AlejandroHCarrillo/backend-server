@@ -61,9 +61,6 @@ app.put("/:id", (req, res) => {
     // usuario.img = body.img,
     usuario.role = body.role;
 
-    // Ocultamos el Password
-    usuario.password = ":S";
-    
     // Actualizamos al usuario
     usuario.save((err, usuarioGuardado) => {
       // Manejo de errores
@@ -74,12 +71,13 @@ app.put("/:id", (req, res) => {
           errors: err
         });
       }
+      // Ocultamos el Password
+      usuario.password = ":S";
 
       res.status(200).json({
         ok: true,
         usuario: usuarioGuardado
       });
-
     });
   });
 });
@@ -112,6 +110,37 @@ app.post("/", (req, res) => {
     res.status(201).json({
       ok: true,
       usuario: usuarioGuardado
+    });
+  });
+});
+
+// ==========================================================
+// Eliminar un usuario por el Id
+// ==========================================================
+app.delete("/:id", (req, res) => {
+  var id = req.params.id;
+
+  Usuario.findByIdAndDelete(id, (err, usuarioBorrado) => {
+    // validar si ocurrio un error
+    if (err) {
+      return res.status(500).json({
+        ok: false,
+        mensaje: "Error al borrar usuario",
+        errors: err
+      });
+    }
+
+    if (!usuarioBorrado) {
+      return res.status(400).json({
+        ok: false,
+        mensaje: "No existe el usuario con ese id para ser borrado",
+        errors: { message: "Usuario no encontrado con ese id" }
+      });
+    }
+
+    res.status(200).json({
+      ok: true,
+      usuario: usuarioBorrado
     });
   });
 });

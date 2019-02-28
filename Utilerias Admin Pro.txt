@@ -14,6 +14,8 @@ https://github.com/expressjs/body-parser
 npm install body-parser --save
 
 
+instalar el node demon, para que reinicie el servidor npm cada que hay cambios
+nodemon app.js
 
 Mongoose provides a straight-forward, schema-based solution to model your application data. It includes built-in type casting, validation, query building, business logic hooks and more, out of the box.
 
@@ -26,3 +28,11 @@ npm install mongoose-unique-validator --save
 Encriptar password
 https://github.com/dcodeIO/bcrypt.js
 npm install bcryptjs --save
+
+
+Levantar mongodb
+"C:\Program Files\MongoDB\Server\4.0\bin\mongod.exe" --dbpath="c:\MongoDB\data\db"
+
+Levantar npm backend
+C:\Repos\backend-server>npm start
+
