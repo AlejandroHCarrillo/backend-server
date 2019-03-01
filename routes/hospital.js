@@ -1,6 +1,4 @@
 var express = require("express");
-var bcrypt = require("bcryptjs");
-var jwt = require("jsonwebtoken");
 
 var mdAutentificacion = require('../middlewares/autenticacion');
 
@@ -57,6 +55,7 @@ app.put("/:id", mdAutentificacion.verificaToken, (req, res) => {
     var body = req.body;
 
     hospital.nombre = body.nombre;
+    hospital.usuario = req.usuario._id;
 
     // Actualizamos al hospital
     hospital.save((err, hospitalGuardado) => {
@@ -68,8 +67,6 @@ app.put("/:id", mdAutentificacion.verificaToken, (req, res) => {
           errors: err
         });
       }
-      // Ocultamos el Password
-      hospital.password = ":S";
 
       res.status(200).json({
         ok: true,
@@ -87,7 +84,7 @@ app.post("/", mdAutentificacion.verificaToken, (req, res) => {
 
   var hospital = new Hospital({
     nombre: body.nombre,
-    img: body.img
+    usuario: req.usuario._id
   });
 
   hospital.save((err, hospitalGuardado) => {
@@ -101,8 +98,7 @@ app.post("/", mdAutentificacion.verificaToken, (req, res) => {
 
     res.status(201).json({
       ok: true,
-      hospital: hospitalGuardado,
-      hospitaltoken: req.hospital
+      hospital: hospitalGuardado
     });
   });
 });
