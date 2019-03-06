@@ -3,6 +3,7 @@ var bcrypt = require("bcryptjs");
 var jwt = require("jsonwebtoken");
 
 SEED = require("../config/config").SEED;
+TIMETOEXPIRE = require("../config/config").TIMETOEXPIRE;
 
 var app = express();
 
@@ -30,8 +31,6 @@ app.post("/", (req, res) => {
           });
       }
 
-      console.log(usuarioDB);
-      
       // Verificar el password correcto
       if( !bcrypt.compareSync(body.password, usuarioDB.password) ){
         return res.status(200).json({
@@ -43,7 +42,7 @@ app.post("/", (req, res) => {
 
       // Crear token que con 4 horas de vigencia
       usuarioDB.password = ":S";
-      var token = jwt.sign({ usuario: usuarioDB }, SEED, { expiresIn: 14400 } );
+      var token = jwt.sign({ usuario: usuarioDB }, SEED, { expiresIn: TIMETOEXPIRE } );
 
     //   regresar respuesta
       res.status(200).json({

@@ -1,6 +1,7 @@
+PAGESIZE = require("../config/config").PAGESIZE;
 var express = require("express");
 
-var mdAutentificacion = require('../middlewares/autenticacion');
+var mdAutentificacion = require("../middlewares/autenticacion");
 
 var app = express();
 
@@ -10,8 +11,14 @@ var Hospital = require("../models/hospital");
 // Obtener todos los hospitales
 // ==========================================================
 app.get("/", (req, res, next) => {
-  Hospital.find({}, "nombre img usuario").exec(
-    (err, hospitales) => {
+  var desde = req.query.desde || 0;
+  desde = Number(desde);
+
+  Hospital.find({})
+    .populate("usuario", "nombre email")
+    .skip(desde)
+    .limit(PAGESIZE)
+    .exec((err, hospitales) => {
       if (err) {
         return res.status(500).json({
           ok: false,
@@ -20,12 +27,14 @@ app.get("/", (req, res, next) => {
         });
       }
 
-      res.status(200).json({
-        ok: true,
-        hospitales: hospitales
+      Hospital.count({}, (err, conteo) => {
+        res.status(200).json({
+          ok: true,
+          hospitales: hospitales,
+          total: conteo
+        });
       });
-    }
-  );
+    });
 });
 
 // ==========================================================

@@ -1,8 +1,8 @@
+PAGESIZE = require("../config/config").PAGESIZE;
 var express = require("express");
 var bcrypt = require("bcryptjs");
-var jwt = require("jsonwebtoken");
 
-var mdAutentificacion = require('../middlewares/autenticacion');
+var mdAutentificacion = require("../middlewares/autenticacion");
 
 var app = express();
 
@@ -12,8 +12,15 @@ var Usuario = require("../models/usuario");
 // Obtener todos los usuarios
 // ==========================================================
 app.get("/", (req, res, next) => {
-  Usuario.find({}, "nombre apellidoP apellidoM img role").exec(
-    (err, usuarios) => {
+  // console.log('get usuario...');
+
+  var desde = req.query.desde || 0;
+  desde = Number(desde);
+
+  Usuario.find({}, "nombre apellidoP apellidoM img role")
+    .skip(desde)
+    .limit(PAGESIZE)
+    .exec((err, usuarios) => {
       if (err) {
         return res.status(500).json({
           ok: false,
@@ -21,13 +28,14 @@ app.get("/", (req, res, next) => {
           errors: err
         });
       }
-
-      res.status(200).json({
-        ok: true,
-        usuarios: usuarios
+      Usuario.count({}, (err, conteo) => {
+        res.status(200).json({
+          ok: true,
+          usuarios: usuarios,
+          total: conteo
+        });
       });
-    }
-  );
+    });
 });
 
 // ==========================================================
