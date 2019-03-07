@@ -4,13 +4,6 @@ var app = express();
 const path = require("path");
 const fs = require("fs");
 
-// app.get('/', (req, res) => {
-//     res.status(200).json({
-//         ok: true,
-//         mensaje: 'Peticion IMG realizada con exito'
-//     });
-// } );
-
 app.get("/:tipo/:img", (req, res) => {
   var tipo = req.params.tipo;
   var img = req.params.img;

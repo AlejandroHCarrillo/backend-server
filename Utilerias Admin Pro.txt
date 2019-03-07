@@ -44,6 +44,28 @@ https://github.com/richardgirges/express-fileupload
 
 npm install --save express-fileupload
 
+Goggle sing in
+https://developers.google.com/identity/sign-in/web/devconsole-project
+https://developers.google.com/identity/sign-in/web/sign-in#before_you_begin
+
+Biblioteca o library de Goggle
+https://console.developers.google.com/apis/dashboard?project=lateral-scion-233821&supportedpurview=project
+
+
+
+npm install google-auth-library --save
+
+246495645277-lej43f1u8smboa1lluam2fdgkcbelco7.apps.googleusercontent.com
+qrpCwlNQfWZbrPvl3Rs4uuc9
+
+
+
+Lite Server
+https://github.com/johnpapa/lite-server
+npm install lite-server --save-dev
+
+Run Lite server
+npm run dev
 
 
 Levantar mongodb
