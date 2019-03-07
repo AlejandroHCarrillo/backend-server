@@ -2,7 +2,7 @@
 
 Instalacion de complementos para el Backend
 
-¿Express?
+ï¿½Express?
 Express nos sirve para habilitar el ruteo REST de los repositorios 
 https://expressjs.com/es/starter/installing.html
 
@@ -39,7 +39,10 @@ npm install jsonwebtoken --save
 
 jwt.io
 
+File upload
+https://github.com/richardgirges/express-fileupload
 
+npm install --save express-fileupload
 
 
 
@@ -48,4 +51,5 @@ Levantar mongodb
 
 Levantar npm backend
 C:\Repos\backend-server>npm start
+
 
