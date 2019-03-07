@@ -23,6 +23,7 @@ var hospitalRoutes = require('./routes/hospital')
 var medicoRoutes = require('./routes/medico')
 var busquedaRoutes = require('./routes/busqueda')
 var uploadRoutes = require('./routes/upload')
+var imagenesRoutes = require('./routes/imagenes')
 
 // Conexion a la base de datos
 mongoose.connection.openUri('mongodb://localhost:' + mongoDBPort + '/hospitalDB', { useNewUrlParser: true }, (err, res )=>{
@@ -31,6 +32,7 @@ mongoose.connection.openUri('mongodb://localhost:' + mongoDBPort + '/hospitalDB'
 } );
 
 // Rutas
+app.use('/img', imagenesRoutes)
 app.use('/upload', uploadRoutes)
 app.use('/busqueda', busquedaRoutes)
 app.use('/login', loginRoutes)
@@ -41,7 +43,7 @@ app.use('/', appRoutes)
 
 // Escuchar peticiones
 app.listen(portNumber, () => { 
-    console.log('AHC: El servidor Express esta \x1b[32m%s\x1b[0m ', ' on line corriendo en el puerto ' +portNumber + '.');
+    console.log('El servidor express esta \x1b[32m%s\x1b[0m ', ' on line corriendo en el puerto ' +portNumber + '.');
 } );
 
 // 
