@@ -9,6 +9,14 @@ var bodyParser = require('body-parser')
 // Inicializar variables
 var app = express()
 
+// Configurar el CORS
+app.use(function(req, res, next) {
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
+    res.header("Access-Control-Allow-Headers", "Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With, Origin, Accept");
+    next();
+  });
+
 // Body Parser
 // parse application/x-www-form-urlencoded
 // parse application/json
@@ -26,7 +34,7 @@ var uploadRoutes = require('./routes/upload')
 var imagenesRoutes = require('./routes/imagenes')
 
 // Conexion a la base de datos
-mongoose.connection.openUri('mongodb://localhost:' + mongoDBPort + '/hospitalDB', { useNewUrlParser: true }, (err, res )=>{
+mongoose.connection.openUri('mongodb://localhost:' + mongoDBPort + '/hospitalDB', { useNewUrlParser: true, useCreateIndex: true }, (err, res )=>{
     if (err) throw err;    
     console.log('Base de datos: \x1b[32m%s\x1b[0m ', ' on line ');    
 } );

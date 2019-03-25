@@ -6,3 +6,4 @@ module.exports.PAGESIZE = 5;
 
 // Google
 module.exports.CLIENT_ID = "246495645277-lej43f1u8smboa1lluam2fdgkcbelco7.apps.googleusercontent.com"
+module.exports.GOOGLE_SECRET = "qrpCwlNQfWZbrPvl3Rs4uuc9"

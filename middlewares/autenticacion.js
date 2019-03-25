@@ -21,9 +21,49 @@ exports.verificaToken = function(req, res, next) {
 
     req.usuario = decoded.usuario;
     next();
-    // return res.status(200).json({
-    //   ok: false,
-    //   decoded: decoded
-    // });
+
   });
+};
+
+// ==========================================================
+// Middleware: Verificar ADMIN
+// Todos los metodos siguientes son solo para Administradores
+// ==========================================================
+
+exports.verificaADMIN_ROLE = function(req, res, next) {
+
+  var usuario = req.usuario
+
+  if (usuario.role == "ADMIN_ROLE" ){
+    next();
+    return;
+  } else {
+    return res.status(401).json({
+      ok: false,
+      mensaje: "El usuario no es administrador",
+      errors: { message : "Peticion reservada solo para administradores." }
+    });
+  }
+};
+
+// ==========================================================
+// Middleware: Verificar ADMIN o El mismo usuario
+// El metodos siguientes son solo para Administradores o para el propioUsuario
+// ==========================================================
+
+exports.verificaADMIN_o_MismoUsuario = function(req, res, next) {
+
+  var usuario = req.usuario
+  var id = req.params.id
+
+  if (usuario.role == "ADMIN_ROLE" || usuario.id == id ){
+    next();
+    return;
+  } else {
+    return res.status(401).json({
+      ok: false,
+      mensaje: "El usuario no es administrador ni es el propio usuario",
+      errors: { message : "Peticion reservada solo para administradores." }
+    });
+  }
 };

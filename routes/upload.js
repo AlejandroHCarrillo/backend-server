@@ -29,14 +29,14 @@ app.put("/:tipo/:id", (req, res) => {
   var extensionArchivo = nombreCortado[nombreCortado.length - 1];
 
   // Verifica el tipo de imagenes
-  var coleccionesValidas = ["hospital", "medico", "usuario"];
+  var coleccionesValidas = ["hospitales", "medicos", "usuarios"];
   if (coleccionesValidas.indexOf(tipo) < 0) {
     return res.status(400).json({
       ok: false,
       mensaje: "El tipo de coleccion de imagen no es valido",
       errors: {
         message:
-          "Debe seleccionar un tipo de coleccion valida" +
+          "Debe seleccionar un tipo de coleccion valida " +
           coleccionesValidas.join(", ")
       }
     });
@@ -78,7 +78,7 @@ app.put("/:tipo/:id", (req, res) => {
 });
 
 function subirPorTipo(tipo, id, nombreArchivo, res) {
-  if (tipo === "usuario") {
+  if (tipo === "usuarios") {
     Usuario.findById(id, (err, usuario) => {
       if (!usuario) {
         return res.status(400).json({
@@ -113,7 +113,7 @@ function subirPorTipo(tipo, id, nombreArchivo, res) {
     });
   }
 
-    if (tipo === "medico") {
+    if (tipo === "medicos") {
         Medico.findById(id, (err, medico) => {
             if (!medico) {
                 return res.status(400).json({
@@ -146,7 +146,7 @@ function subirPorTipo(tipo, id, nombreArchivo, res) {
           });
     }
 
-    if (tipo === "hospital") {
+    if (tipo === "hospitales") {
         Hospital.findById(id, (err, hospital) => {
             if (!hospital) {
                 return res.status(400).json({
